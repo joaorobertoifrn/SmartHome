@@ -5,16 +5,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { TopicoServiceProvider } from '../providers/topico-service/topico-service';
-import { SigninPage } from '../pages/signin/signin';
-import { SignupPage } from '../pages/signup/signup';
-import { ResetpasswordPage } from '../pages/resetpassword/resetpassword';
 
+// Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+// Grafico
+import { ChartsModule } from 'ng2-charts';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBwYB99I0GnKnVyF7gdjOM3DFYdCLolajA",
@@ -27,28 +27,19 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    SigninPage,
-    SignupPage,
-    ResetpasswordPage
-
+    MyApp
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    ChartsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    SigninPage,
-    SignupPage,
-    ResetpasswordPage
-
+    MyApp
   ],
   providers: [
     StatusBar,

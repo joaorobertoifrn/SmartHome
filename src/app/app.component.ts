@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
-import { SigninPage } from '../pages/signin/signin';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -12,23 +9,55 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  @ViewChild(Nav) nav: Nav;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, afAuth: AngularFireAuth) {
+  rootPage: string = 'HomePage';
 
-    afAuth.authState.subscribe(usuario => {
+  pages: Array<{title: string, component: string}>;
+
+    constructor(
+        public platform: Platform, 
+        public statusBar: StatusBar, 
+        public splashScreen: SplashScreen,
+        public afAuth: AngularFireAuth
+      ){
+    this.initializeApp();
+
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: 'Home', component: 'HomePage' },
+      { title: 'Controle', component: 'ControlePage' },
+      { title: 'Configuração', component: 'ConfiguracaoPage'},
+      { title: 'Logout', component: ''}
+    ];
+ 
+  }
+
+  initializeApp() {
+    this.afAuth.authState.subscribe(usuario => {
       if (usuario) {
-        this.rootPage = HomePage;
+        this.rootPage = 'ControlePage';
       } else {
-        this.rootPage = SigninPage;
+        this.rootPage = 'SigninPage';
       }
     });
 
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
   }
+
+  openPage(page : {title:string, component:string}) {
+    
+    switch (page.title) {
+      case 'Logout':
+        this.afAuth.auth.signOut();
+        this.nav.setRoot('SigninPage');
+      break;
+    
+      default:
+        this.nav.setRoot(page.component);
+    }
+  }
 }
-
-

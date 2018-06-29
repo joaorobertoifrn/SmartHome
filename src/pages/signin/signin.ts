@@ -3,9 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { Usuario } from '../../model/usuario.model';
-import { HomePage } from '../home/home';
-import { ResetpasswordPage } from '../resetpassword/resetpassword';
-import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -13,6 +10,7 @@ import { SignupPage } from '../signup/signup';
   templateUrl: 'signin.html',
 })
 export class SigninPage {
+  
   usuario: Usuario = new Usuario();
   @ViewChild('form') form: NgForm;
 
@@ -23,18 +21,18 @@ export class SigninPage {
   }
 
   resetPassword() {
-    this.navCtrl.push(ResetpasswordPage);
+    this.navCtrl.push('ResetpasswordPage');
   }
 
   createAccount() {
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.push('SignupPage');
   }
 
   signIn() {
     if (this.form.form.valid) {
       this.authService.signIn(this.usuario)
         .then(() => {
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot('HomePage');
         })
         .catch((error: any) => {
           let toast = this.toastCtrl.create({ duration: 3000, position: 'bottom' });

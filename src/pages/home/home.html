@@ -1,6 +1,15 @@
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Home</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
 <ion-tabs color="primary">
-  <ion-tab [root]="usuarioRoot" tabTitle="Usuario" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="topicoRoot" tabTitle="Topico" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="monitorRoot" tabTitle="Monitor" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="controleRoot" tabTitle="Controle" tabIcon="information-circle"></ion-tab>
   <ion-tab [root]="configuracaoRoot" tabTitle="Configuracao" tabIcon="information-circle"></ion-tab>
 </ion-tabs>
