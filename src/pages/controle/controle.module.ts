@@ -7,7 +7,8 @@ import { ControlePage } from './controle';
     ControlePage,
   ],
   imports: [
-    IonicPageModule.forChild(ControlePage),
+    IonicPageModule.forChild(ControlePage)
+    
   ],
 })
 export class ControlePageModule {}

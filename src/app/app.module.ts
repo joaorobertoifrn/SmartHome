@@ -12,7 +12,6 @@ import { TopicoServiceProvider } from '../providers/topico-service/topico-servic
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
 // Grafico
 import { ChartsModule } from 'ng2-charts';
 

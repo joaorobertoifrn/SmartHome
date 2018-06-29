@@ -8,6 +8,22 @@
  </ion-header>
  
 
-<ion-content padding>
+ <ion-content padding >
+  <ion-list inset>
 
+    <ion-item>
+      <ion-input type="text" value="" [(ngModel)]="txtTopico" (focusout)="Conectar()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Abrir Porta</ion-label>
+      <ion-toggle checked="false" (ionChange)="Enviar($event, '1')"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Acender Lampada</ion-label>
+      <ion-toggle checked="false" (ionChange)="Enviar($event, '2')"></ion-toggle>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

@@ -8,6 +8,38 @@
  </ion-header>
  
 
-<ion-content padding>
+ <ion-content padding>
+  <ion-list inset>
+
+    <ion-item>
+      <ion-label>Servidor</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="txtServidor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Topico</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="txtTopico"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>ID Cliente</ion-label>
+      <ion-input type="text" value=""></ion-input>
+    </ion-item>
+
+    <br>
+
+    <button ion-button full (click)="ConectarMQTT()">{{btnConectar}}</button>
+
+    <br>
+
+    <ion-list>
+      <ion-item *ngFor="let response of MensagensRecebidas">
+        <ion-label class="label">
+          <p>{{response.mensagem}}</p>
+        </ion-label>
+        <ion-note item-end="" class="note note-ios">{{response.data}}</ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-list>
 
 </ion-content>

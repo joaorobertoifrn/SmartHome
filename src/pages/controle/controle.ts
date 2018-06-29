@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ControlePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Paho } from 'ng2-mqtt/mqttws31';
 
 @IonicPage()
 @Component({
@@ -15,10 +9,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ControlePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  client: any;
+  txtServidor: string;
+  txtPorta: number;
+  txtTopico: string;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  Conectar() {
+    this.client = new Paho.MQTT.Client(this.txtServidor, '');
+    this.client.connect({
+      onSuccess: this.onConnected.bind(this)
+    });
+  }
+
+  onConnected(element) {
+    this.client.subscribe(this.txtTopico);
+    this.sendMessage("Conectado ao topico de IoT");
+  }
+
+  sendMessage(message: string) {
+    let packet = new Paho.MQTT.Message(message);
+    packet.destinationName = this.txtTopico;
+    this.client.send(packet);
+  }
+
+  Enviar(element: any, mensaje: string) {
+    this.sendMessage(`P${mensaje}${element.checked ? 'on' : 'off'}`);
   }
 
 }
